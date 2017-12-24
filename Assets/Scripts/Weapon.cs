@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour {
         }
         
     }
-    
+
     void Shoot(float chargeTime)
     {
         float projectileSpeed = chargeTime * chargeSpeed + missileBaseSpeed;
@@ -49,4 +49,5 @@ public class Weapon : MonoBehaviour {
         clone.velocity = transform.right * projectileSpeed;
 
     }
+
 }
