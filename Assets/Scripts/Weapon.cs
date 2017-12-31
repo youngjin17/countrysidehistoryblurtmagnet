@@ -27,12 +27,12 @@ public class Weapon : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("NormalMissile"))
         {
             startTime = Time.time;
             Debug.Log("charging");
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else if (Input.GetButtonUp("NormalMissile"))
         {
             Shoot(Time.time - startTime);
             startTime += Time.time;
