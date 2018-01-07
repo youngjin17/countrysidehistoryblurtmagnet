@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketNormal : PhysicsObject {
+public class RocketNormal : MonoBehaviour {
 
     public Transform explosionPrefab;
     private Collider2D collisions;
@@ -11,15 +11,13 @@ public class RocketNormal : PhysicsObject {
     {
         collisions = GetComponent<Collider2D>();
         Debug.Log(collisions.isTrigger);
-        Debug.Log(collisions.offset);
     }
 
-    protected override void ComputeVelocity()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hitWall || grounded)
-        {
+        
             Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
-        }
+       
     }
 }
