@@ -1,25 +1,25 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 
-public class PlatformerCharacter2D : MonoBehaviour
+public class Platformer_P2 : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
-    const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
+    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Animator m_Anim;            // Reference to the player's animator component.
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    private bool m_FacingRight = false;  // For determining which way the player is currently facing.
     private bool m_Jump;
     private bool m_UpsideDown = false; // For determing which way the player is currently flipped
-
-
+    
+    
     private void Awake()
     {
         // Setting up references.
@@ -34,13 +34,13 @@ public class PlatformerCharacter2D : MonoBehaviour
         if (!m_Jump)
         {
             // Read the jump input in Update so button presses aren't missed.
-            m_Jump = Input.GetButtonDown("Jump");
+            m_Jump = Input.GetButtonDown("Jump_P2");
         }
-        if (Input.GetButtonDown("Jump") && m_Grounded)
+        if (Input.GetButtonDown("Jump_P2") && m_Grounded)
         {
             m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce));
         }
-        else if (Input.GetButtonUp("Jump"))
+        else if (Input.GetButtonUp("Jump_P2"))
         {
             if (m_Rigidbody2D.velocity.y > 0)
             {
@@ -67,10 +67,12 @@ public class PlatformerCharacter2D : MonoBehaviour
         m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
         // Read the inputs.
 
-        float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxis("Horizontal_P2");
         // Pass all parameters to the character control script.
         Move(h);
         m_Jump = false;
+
+
     }
 
     public void FlipVertical()
@@ -82,7 +84,6 @@ public class PlatformerCharacter2D : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.y *= -1;
         transform.localScale = theScale;
-        m_Rigidbody2D.gravityScale *= -1;
     }
 
     public void Move(float move)
@@ -121,6 +122,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     private void OnDestroy()
     {
+
         GameObject.FindObjectOfType<RightOfWay>().DirectionChooser();
     }
 }

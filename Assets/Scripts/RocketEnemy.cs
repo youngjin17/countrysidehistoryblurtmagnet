@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketNormal : MonoBehaviour {
+public class RocketEnemy : MonoBehaviour
+{
 
     public Transform explosionPrefab;
     private Collider2D collisions;
@@ -24,7 +25,7 @@ public class RocketNormal : MonoBehaviour {
             Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
         }
-        if (other.tag == "Enemy")
+        if (other.tag == "Player")
         {
             Destroy(other.gameObject);
         }

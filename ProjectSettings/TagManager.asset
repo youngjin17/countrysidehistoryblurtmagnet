@@ -13,6 +13,7 @@ TagManager:
   - BombPickup
   - ExplosionFX
   - HealthBar
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -24,10 +25,10 @@ TagManager:
   - 
   - Bombs
   - Player
-  - Enemies
-  - Pickups
-  - Ground
-  - Player
+  - Enemy
+  - Wall
+  - 
+  - 
   - 
   - 
   - 

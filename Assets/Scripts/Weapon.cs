@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-    public Rigidbody2D missile;
+    public Rigidbody2D missileUp;
+    public Rigidbody2D missileDown;
     public float chargeSpeed = 20f;
     public float missileBaseSpeed = 3f;
 
@@ -29,16 +30,17 @@ public class Weapon : MonoBehaviour {
     void Update()
     {
         facingRight = transform.parent.localScale.x > 0;
-        if (Input.GetButtonDown("NormalMissile"))
+        if (Input.GetButtonDown("MissileUp"))
         {
             startTime = Time.time;
             Debug.Log("charging");
         }
-        else if (Input.GetButtonUp("NormalMissile"))
+        else if (Input.GetButtonUp("MissileDown"))
         {
             Shoot(Time.time - startTime);
             startTime += Time.time;
         }
+        
         
     }
 
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour {
         float projectileSpeed = chargeTime * chargeSpeed + missileBaseSpeed;
         Debug.Log("shoot!");
         Quaternion rotation = new Quaternion(0, (facingRight ? 0 : 180), 0, 1);
-        Rigidbody2D clone = Instantiate(missile, shotSpawn.position, rotation) as Rigidbody2D;
+        Rigidbody2D clone = Instantiate(missileDown, shotSpawn.position, rotation) as Rigidbody2D;
         clone.velocity = (facingRight ? transform.right : (transform.right * -1)) * projectileSpeed;
 
     }
